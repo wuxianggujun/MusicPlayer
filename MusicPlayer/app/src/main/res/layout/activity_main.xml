@@ -1,11 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:background="@drawable/main_background">
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Hello World!" />
+  
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="70dp"
+        android:layout_centerVertical="true"
+		android:layout_alignParentBottom="true"
+		android:id="@+id/local_music_bottomlayout"
+		android:background="#33EEEEEE">
 
-</LinearLayout>
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#FF70A7FF"/>
+
+		<ImageView
+			android:layout_width="60dp"
+			android:layout_height="60dp"
+            android:src="@drawable/ic_account_heart"
+			android:layout_centerVertical="true"
+			android:layout_alignParentBottom="true"
+			android:id="@+id/local_music_bottom_iv_icon"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="告白气球"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_toRightOf="@id/local_music_bottom_iv_icon"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:id="@+id/local_music_bottom_tv_song"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="周杰伦"
+			android:id="@+id/local_music_bottom_tv_singer"
+			android:textSize="12sp"
+			android:layout_below="@+id/local_music_bottom_tv_song"
+			android:layout_alignLeft="@+id/local_music_bottom_tv_song"
+			android:layout_marginTop="10dp"/>
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/local_music_bottom_iv_next"
+			android:src="@drawable/ic_skip_next"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="10dp"/>
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/local_music_bottom_iv_play"
+			android:layout_toLeftOf="@+id/local_music_bottom_iv_next"
+            android:src="@drawable/ic_play_circle"
+			android:layout_marginRight="20dp"/>
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/local_music_bottom_iv_last"
+			android:layout_toLeftOf="@+id/local_music_bottom_iv_play"
+			android:layout_marginRight="20dp"
+            android:src="@drawable/ic_arrow_left_bold"
+            />
+
+	</RelativeLayout>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/local_music_recyclerview"  
+        android:layout_above="@+id/local_music_bottomlayout"
+    />
+    
+</RelativeLayout>
+
