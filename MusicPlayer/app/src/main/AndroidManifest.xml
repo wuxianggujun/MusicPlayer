@@ -17,7 +17,7 @@
 		android:resizeableActivity="false">
 
 		<activity
-			android:name=".activity.MainActivity"
+			android:name=".activity.PlayMusicActivity"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
@@ -25,7 +25,14 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-
+        
+        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.LocalMusicActivity"/>
+            
+            <service android:name=".service.MusicService"
+               android:enabled="true"
+               android:exported="true"            
+                />
 		<meta-data
 			android:name="android.max_aspect"
 			android:value="4.0"/>

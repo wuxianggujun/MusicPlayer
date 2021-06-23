@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--背景根据专辑图片而更换，所以用ImageView代替-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/song_lrc_main_iv_bg"
+        android:scaleType="fitXY"
+        android:src="@drawable/main_background"
+        android:contentDescription="@string/label_SongLrcActivity_background"/>
+    <!--遮罩层-->
+    <ImageView
+        android:id="@+id/yest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.39"
+        android:contentDescription="@string/label_Activity_mask"
+        android:scaleType="fitXY"
+        android:src="@color/colorBlack"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/song_lrc_activity_layout_ui_root">
+
+        <!--自下而上，最下面是播放控制按钮-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/song_lrc_csl_bottom_layout"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent=".1">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/song_lrc_bottom_play"
+                android:src="@drawable/iv_play"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:contentDescription="@string/label_SongLrcActivity_play_toggle"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_bottom_left"
+                android:src="@drawable/iv_left"
+                app:layout_constraintBottom_toBottomOf="@id/song_lrc_bottom_play"
+                app:layout_constraintEnd_toStartOf="@id/song_lrc_bottom_play"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_bottom_play"
+                app:layout_constraintStart_toEndOf="@id/song_lrc_bottom_play_mode"
+                app:layout_constraintHorizontal_bias=".8"
+                android:contentDescription="@string/label_SongLrcActivity_previous"
+                android:padding="6dp"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_bottom_right"
+                android:src="@drawable/iv_right"
+                app:layout_constraintBottom_toBottomOf="@id/song_lrc_bottom_play"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_bottom_play"
+                app:layout_constraintStart_toEndOf="@id/song_lrc_bottom_play"
+                app:layout_constraintEnd_toStartOf="@id/song_lrc_bottom_list"
+                app:layout_constraintHorizontal_bias=".2"
+                android:contentDescription="@string/label_SongLrcActivity_next"
+                android:padding="6dp"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_bottom_play_mode"
+                android:src="@drawable/iv_sort_play"
+                app:layout_constraintBottom_toBottomOf="@id/song_lrc_bottom_play"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_bottom_play"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".12"
+                android:padding="4dp"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="@string/label_SongLrcActivity_play_mode_toggle"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_bottom_list"
+                app:layout_constraintBottom_toBottomOf="@id/song_lrc_bottom_play"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_bottom_play"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".88"
+                android:padding="4dp"
+                android:contentDescription="@string/label_Activity_list"
+                android:background="?android:selectableItemBackground"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:id="@+id/song_lrc_csl_center_bar"
+            app:layout_constraintBottom_toTopOf="@id/song_lrc_csl_bottom_layout"
+            app:layout_constraintStart_toStartOf="@id/song_lrc_top_share"
+            app:layout_constraintEnd_toEndOf="@id/song_lrc_top_return"
+            app:layout_constraintWidth_percent=".9">
+
+            <TextView
+                android:id="@+id/song_lrc_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:clickable="false"
+                android:text="@string/label_default_music_progress_show"
+                android:textColor="@color/colorWhite"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:id="@+id/song_lrc_time_end"
+                android:text="@string/label_default_music_progress_show"
+                android:textSize="10sp"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:id="@+id/song_lrc_bar"
+                android:thumb="@drawable/seekbar_pointer"
+                android:maxHeight="1dp"
+                android:progressDrawable="@drawable/seekbar"
+                app:layout_constraintStart_toEndOf="@id/song_lrc_time_start"
+                app:layout_constraintEnd_toStartOf="@id/song_lrc_time_end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".88"/>
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:id="@+id/song_lrc_iv_loading"
+                app:layout_constraintStart_toStartOf="@id/song_lrc_bar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:visibility="invisible"
+                android:contentDescription="@string/label_Activity_loading"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/song_lrc_csl_center_layout"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/song_lrc_csl_center_bar"
+            app:layout_constraintHeight_percent=".06">
+
+            <!--Left 基准点-->
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_center_comment"
+                android:padding="5dp"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".14"
+                android:contentDescription="@string/label_SongLrcActivity_comment"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_center_descargar"
+                android:src="@drawable/iv_descargar"
+                android:padding="4dp"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_center_comment"
+                app:layout_constraintStart_toEndOf="@id/song_lrc_center_comment"
+                app:layout_constraintEnd_toStartOf="@id/song_lrc_center_open"
+                android:contentDescription="@string/label_SongLrcActivity_download"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_center_open"
+                android:src="@drawable/iv_jpg"
+                android:padding="4dp"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_center_comment"
+                app:layout_constraintStart_toEndOf="@id/song_lrc_center_descargar"
+                app:layout_constraintEnd_toStartOf="@id/song_lrc_center_love"
+                android:contentDescription="@string/label_SongLrcActivity_browser"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_center_love"
+                android:src="@drawable/iv_love"
+                android:padding="4dp"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_center_comment"
+                app:layout_constraintStart_toEndOf="@id/song_lrc_center_open"
+                app:layout_constraintEnd_toStartOf="@id/song_lrc_center_more"
+                android:contentDescription="@string/label_SongLrcActivity_love"
+                android:background="?android:selectableItemBackground"/>
+
+            <!--Right 基准点-->
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/song_lrc_center_more"
+                android:padding="2dp"
+                app:layout_constraintTop_toTopOf="@id/song_lrc_center_open"
+                app:layout_constraintBottom_toBottomOf="@id/song_lrc_center_open"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".86"
+                android:contentDescription="@string/label_SongLrcActivity_more"
+                android:background="?android:selectableItemBackground"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--LrcView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/song_lrc_center_lrc"
+        app:layout_constraintStart_toStartOf="@id/song_lrc_top_share"
+        app:layout_constraintEnd_toEndOf="@id/song_lrc_top_return"
+        app:layout_constraintTop_toBottomOf="@id/song_lrc_top_bar_volume"
+        app:layout_constraintBottom_toTopOf="@id/song_lrc_csl_center_bar"/-->
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/song_lrc_center_lrc_group"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="song_lrc_top_bar_volume,song_lrc_top_sounds"/>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/song_lrc_center_album"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/song_lrc_top_bar_volume"
+            app:layout_constraintBottom_toTopOf="@id/song_lrc_csl_center_layout"
+            app:layout_constraintVertical_bias=".25"
+            app:layout_constraintHorizontal_bias=".5"
+            android:background="?android:selectableItemBackgroundBorderless"/>
+
+
+
+        <!--ellipsize: 文本超过限制则给滚动显示-->
+        <com.wuxianggujun.musicplayer.widget.MarqueeTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/song_lrc_top_song"
+            android:text="@string/label_default_title"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/song_lrc_top_share"
+            app:layout_constraintEnd_toStartOf="@id/song_lrc_top_return"
+            app:layout_constraintTop_toTopOf="@id/song_lrc_top_share"
+            app:layout_constraintBottom_toTopOf="@id/song_lrc_top_share"
+            app:layout_constraintWidth_percent=".65"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/song_lrc_top_singer"
+            android:text="@string/label_default_artist"
+            android:textColor="@color/colorGrey"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/song_lrc_top_share"
+            app:layout_constraintEnd_toStartOf="@id/song_lrc_top_return"
+            app:layout_constraintTop_toBottomOf="@id/song_lrc_top_song"
+            app:layout_constraintWidth_percent=".5"/>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:id="@+id/song_lrc_top_sounds"
+            android:src="@drawable/iv_sounds"
+            app:layout_constraintStart_toStartOf="@id/song_lrc_top_share"
+            app:layout_constraintTop_toBottomOf="@id/song_lrc_top_share"
+            app:layout_constraintBottom_toBottomOf="@id/song_lrc_top_bar_volume"
+            app:layout_constraintVertical_bias=".9"
+            android:contentDescription="@string/label_SongLrcActivity_volume"/>
+        <SeekBar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/song_lrc_top_bar_volume"
+            android:thumb="@drawable/seekbar_pointer_sound"
+            android:progressDrawable="@drawable/seekbar_volume"
+            android:maxHeight="1.4dp"
+            android:secondaryProgress="100"
+            app:layout_constraintStart_toEndOf="@id/song_lrc_top_sounds"
+            app:layout_constraintEnd_toEndOf="@id/song_lrc_top_return"
+            app:layout_constraintTop_toTopOf="@id/song_lrc_top_sounds"
+            app:layout_constraintBottom_toBottomOf="@id/song_lrc_top_sounds"/>
+        <!--Left 与 Top 基准点-->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/song_lrc_top_share"
+            android:src="@drawable/iv_share2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias=".05"
+            app:layout_constraintVertical_bias=".07"
+            android:padding="4dp"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription="@string/label_SongLrcActivity_share"/>
+        <!--Right 基准点-->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/song_lrc_top_return"
+            android:src="@drawable/iv_return"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/song_lrc_top_share"
+            app:layout_constraintHorizontal_bias=".95"
+            android:padding="3dp"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription="@string/label_Activity_return"/>
+
+        <!--获取封面歌词-->
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:id="@+id/song_lrc_csl_center_tv_get_search"
+            android:text="@string/label_SongLrcActivity_get"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/song_lrc_csl_center_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="50dp"
+            android:visibility="visible"
+            android:background="@drawable/get_search_round"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

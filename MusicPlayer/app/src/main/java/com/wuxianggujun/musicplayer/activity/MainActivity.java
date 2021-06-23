@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //记录暂停时音乐进度条变量
     private int currentPausePositionInSong = 0;
     private MediaPlayer mediaPlayer;
-
+   
     private List<LocalMusicBean> mDatas;//数据源
     private LocalMusicAdapter adapter;
 	@Override

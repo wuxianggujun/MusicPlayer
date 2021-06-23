@@ -1,4 +1,66 @@
 <resources>
 	<string name="app_name">MusicPlayer</string>
 
+    <string name="action_settings">Settings</string>
+<!--默认字段-->
+    <string name="label_default_id">1000</string><!--用于设置item_list(layout)的音乐数目的大小，居中显示-->.
+    <string name="label_default_title">No Me Importar El Dinero (En Vivo)</string>
+    <string name="label_default_artist">Los Autéticos Decadentes - 25 Aniversario En Vivo En El Palacio de los Deportes</string>
+    <string name="label_default_music_progress_show">00:00</string>
+<!--item-->
+    <string name="label_item_more">更多</string>
+    <string name="label_item_music_count">0首</string>
+<!--Activity-->
+    <string name="label_Activity_mask">遮罩层</string>
+    <string name="label_Activity_line">分割线</string>
+    <string name="label_Activity_list">正在播放音乐的歌单</string>
+    <string name="label_Activity_toggle">播放切换</string>
+    <string name="label_Activity_return">返回上一级Activity</string>
+    <string name="label_Activity_loading">加载中</string>
+    <!--MainActivity-->
+    <string name="label_MainActivity_recommend">帮助</string>
+    <string name="label_MainActivity_info">发现</string>
+    <string name="label_MainActivity_mine">我的</string>
+    <string name="label_MainActivity_browser">浏览</string>
+    <string name="label_MainActivity_download">下载</string>
+
+    <string name="label_MusicActivity_search">搜索</string>
+    <!--SongLrcActivity-->
+    <string name="label_SongLrcActivity_background">背景</string>
+    <string name="label_SongLrcActivity_share">分享歌曲</string>
+    <string name="label_SongLrcActivity_return">返回上一级Activity</string>
+    <string name="label_SongLrcActivity_volume">音量调节</string>
+    <string name="label_SongLrcActivity_cover">歌曲封面</string>
+    <string name="label_SongLrcActivity_comment">评论</string>
+    <string name="label_SongLrcActivity_download">下载歌曲</string>
+    <string name="label_SongLrcActivity_browser">浏览</string>
+    <string name="label_SongLrcActivity_love">收藏至最近很喜欢</string>
+    <string name="label_SongLrcActivity_more">更多功能</string>
+    <string name="label_SongLrcActivity_play_mode_toggle">播放模式切换</string>
+    <string name="label_SongLrcActivity_previous">上一曲</string>
+    <string name="label_SongLrcActivity_play_toggle">播放切换</string>
+    <string name="label_SongLrcActivity_next">下一曲</string>
+    <string name="label_SongLrcActivity_get">获取封面歌词</string>
+<!--Fragment-->
+    <!--MineFragment-->
+    <string name="label_MineFragment_user_name">用户名</string>
+    <string name="label_MineFragment_user_name_tips">用户名：</string>
+    <string name="label_MineFragment_user_icon">用户头像</string>
+    <string name="label_MineFragment_user_icon_tips">更换头像:</string>
+    <string name="label_MineFragment_user_label">Supreme</string>
+    <string name="label_MineFragment_user_label_tips">个性便笺：</string>
+    <string name="label_MineFragment_input_new_user_name">点击输入新用户名</string>
+    <string name="label_MineFragment_input_new_user_label">点击输入新个性便笺</string>
+    <string name="label_MineFragment_user_share">分享</string>
+    <string name="label_MineFragment_local_download">本地/下载</string>
+    <string name="label_MineFragment_import_list">导入外部歌单</string>
+    <string name="label_MineFragment_sheet_more">更多</string>
+    <string name="label_MineFragment_sheet_add">添加</string>
+    <string name="label_MineFragment_sheet_empty">清空输入框</string>
+
+    <string name="label_BrowserFragment_home_title">输入访问的网址并回车搜索</string>
+    <string name="label_DownloadFragment_tips">下载历史</string>
+    <string name="label_HelpFragment_tips">使用提示</string>
+    <string name="label_DownloadFragment_et_hint">搜索下载历史中的歌曲</string>
+
 </resources>
