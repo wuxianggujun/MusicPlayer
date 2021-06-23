@@ -14,6 +14,11 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 import android.content.Intent;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import androidx.annotation.NonNull;
+import android.widget.TextView;
 /**
  * @作者: 无相孤君
  * @QQ: 3344207732
@@ -25,13 +30,14 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     private MyItemOnclick itemOnclickListener;
 
+    private static TextView total_tv,current_tv;
 
 
     //绑定service活动
     private Intent mServiceIntent;
     private MusicService mMusicService; 
+    private MusicService.MusicServiceControl musicControl;
     private MusicServiceConnection mMusicServiceConnection;
-
 
 
     @Override
@@ -40,6 +46,8 @@ public class PlayMusicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_music);
         init();
         iv_play = findViewById(R.id.song_lrc_bottom_play);
+        current_tv = findViewById(R.id.song_lrc_time_start);
+        total_tv = findViewById(R.id.song_lrc_time_end);
         iv_play.setOnClickListener(itemOnclickListener);
     }
 
@@ -76,6 +84,34 @@ public class PlayMusicActivity extends AppCompatActivity {
 
 
 
+    public static Handler handler = new Handler(Looper.myLooper()){
+
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            //获取从子线程发送过来的数据
+            Bundle bundle = msg.getData();
+            //歌曲总时长
+            int duration = bundle.getInt("duration");
+            //歌曲当前进度
+            int currentPosition = bundle.getInt("currentPosition");
+            //给进度条设置当前音乐进度          
+            //setmax(duration);
+            //setprogress(currentPosition);
+            String totalTime = msToMinSec(duration);
+            String currentTime = msToMinSec(currentPosition);
+            total_tv.setText(totalTime);
+            current_tv.setText(currentTime);
+
+        }      
+    };
+
+    private static String msToMinSec(int ms) {
+        int sec = ms / 1000;
+        int min = sec / 60;
+        sec -= min * 60;
+        return String.format("%02d:%02d", min, sec);
+    }
 
 
 
@@ -90,7 +126,8 @@ public class PlayMusicActivity extends AppCompatActivity {
 
                 case R.id.song_lrc_bottom_play:
                     //播放音乐按钮
-                    mMusicService.mMusicServiceControl.play();
+                    musicControl.play();
+                    musicControl.addTimer();
                     Toast.makeText(getApplication(), "点击了播放", Toast.LENGTH_SHORT).show();
                     break;
 
@@ -109,8 +146,8 @@ public class PlayMusicActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder iBinder) {
             Log.d("tag", "onServiceConnected");          
-            MusicService.MusicServiceControl  myBinder = (MusicService.MusicServiceControl) iBinder;
-            mMusicService = myBinder.getMusicService();
+            musicControl = (MusicService.MusicServiceControl) iBinder;
+            mMusicService = musicControl.getMusicService();
 
         }
 
@@ -120,11 +157,7 @@ public class PlayMusicActivity extends AppCompatActivity {
             if (mMusicService != null) {
                 mMusicService = null;
             }
-
         }
-
-
-
     }
 
 
