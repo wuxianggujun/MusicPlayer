@@ -19,7 +19,7 @@ import android.os.Bundle;
  */
 public class MusicService extends Service {
 
-    private MediaPlayer mediaPlayer;
+    public MediaPlayer mediaPlayer;
     private Timer timer;
     public  MusicServiceControl mMusicServiceControl = new MusicServiceControl();
     @Override
@@ -27,6 +27,7 @@ public class MusicService extends Service {
         super.onCreate();
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
+            
             //为播放器添加播放完成时的监听器
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
 
@@ -87,24 +88,30 @@ public class MusicService extends Service {
                     }
                 };
                 //开始计时任务后的5毫秒，后面500毫秒执行一次
-                timer.schedule(task,5,500);
+                timer.schedule(task, 5, 500);
             }
 
 
 
         }
 
+    
+        
 
         public void play() {
-            mediaPlayer.reset();
-            mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.asi105du);
-            mediaPlayer.start();
-
+            if (mediaPlayer != null && !mediaPlayer.isPlaying()) {             
+                mediaPlayer.reset();
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.asi105du);            
+                mediaPlayer.start();
+                addTimer();             
+            }
+        }
+        public boolean isPlaying(){
+            return mediaPlayer.isPlaying();
         }
 
         public void pause() {
             mediaPlayer.pause();
-
         }
 
 
@@ -115,6 +122,9 @@ public class MusicService extends Service {
         public void stop() {
             mediaPlayer.stop();
             mediaPlayer.release();
+            if (timer != null) {
+                timer.cancel();
+            }
         }
 
         public void seekTo(int ms) {
